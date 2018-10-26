@@ -29,7 +29,7 @@ class SistemaOptico():
 				rY = y-CeroY
 				if rX**2+rY**2 >= 10**2:
 					filtro[x][y] = 1
-		return np.fft.fft2(imagenToProcess*filtro)
+		return filtro
 
 	def filtroPasoBajo(self, imagenToProcess=0):
 		if imagenToProcess == 0:
@@ -43,5 +43,4 @@ class SistemaOptico():
 				rY = y-CeroY
 				if rX**2+rY**2 <= 50**2:
 					filtro[x][y] = 1
-		return np.fft.fft2(imagenToProcess*filtro)
-	
+		return filtro
