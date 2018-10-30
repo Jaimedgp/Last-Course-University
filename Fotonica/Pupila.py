@@ -4,7 +4,7 @@ import numpy as np
 
 class EspejoResonador():
 
-    def __init__(self, tamanhoX=600, tamanhoY=600, diametro=120, curvatura=0,
+    def __init__(self, tamanhoX=600, tamanhoY=600, diametro=120.0, curvatura=0,
                  tilt=0, tip=0):
 
         self.diamtr = diametro
@@ -18,11 +18,11 @@ class EspejoResonador():
 
 
         for x in range(0, self.sizeX):
-            rX = self.sizeX-x
+            rX = x-(self.sizeX/2)
             for y in range(0,self.sizeY):
-                rY = y-self.sizeY
+                rY = (self.sizeY/2)-y
                 r2 = rX**2+rY**2
-                if r2 > (self.diamtr/2)**2:
+                if r2 < (self.diamtr/2)**2:
                     self.lente[x][y] = cmath.exp(1j*self.crv*r2)
                 if r2 == (self.diamtr/2)**2:
                     self.lente[x][y] = 0.5*cmath.exp(1j*self.crv*r2)
