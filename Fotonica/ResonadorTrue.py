@@ -22,8 +22,8 @@ def mostrarEspejo(x, y, matrix):
 
 
 Espejo1 = EspejoResonador(curvatura=0.01)
-Espejo1.lenteCircular()
-Espejo2 = EspejoResonador(curvatura=0.012)
+Espejo1.lenteCuadrada()
+Espejo2 = EspejoResonador(curvatura=-0.012)
 Espejo2.lenteCuadrada()
 
 fig = plt.figure()
@@ -33,7 +33,7 @@ a.imshow(abs(Espejo1.lente))
 b.imshow(abs(Espejo2.lente))
 
 M1 = Espejo1.lente
-for i in range(0, 5):
+for i in range(0, 50):
     rebote1 = Espejo1.rebotes(M1)
     if i == 0:
         rebote1 = np.fft.fftshift(rebote1)
