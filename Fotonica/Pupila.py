@@ -34,7 +34,7 @@ class EspejoResonador():
                 rY = (self.sizeY/2)-y
                 r2 = rX**2+rY**2
 
-                if abs(rX) < self.diamtr and abs(rY) < (self.diamtr:
+                if abs(rX) < self.diamtr and abs(rY) < self.diamtr:
                     self.lente[x][y] = cmath.exp(1j*self.crv*r2)
                 elif ((abs(rX) < self.diamtr or abs(rY) < self.diamtr)
                         and (abs(rX) == self.diamtr or abs(rY) == self.diamtr)):
