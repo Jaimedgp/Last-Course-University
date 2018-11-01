@@ -4,7 +4,7 @@ import numpy as np
 
 class EspejoResonador():
 
-    def __init__(self, tamanhoX=600, tamanhoY=600, diametro=120.0, curvatura=0,
+    def __init__(self, tamanhoX=600, tamanhoY=600, diametro=100.0, curvatura=0,
                  tilt=0.0, tip=0.0):
 
         self.diamtr = diametro
@@ -51,16 +51,19 @@ class EspejoResonador():
 
         return reflec
 
-    def moverEspejoAleatorio(self):
-        self.tilt += np.random.randint(-10,10)/100.0
-        while self.tilt > 1:
-            self.tilt = self.tilt-2
-        while self.tilt < -1:
-            self.tilt = 2 - self.tilt
-        self.tip += np.random.randint(-10,10)/100.0
-        while self.tip > 1:
-            self.tip = self.tip-2
-        while self.tip < -1:
-            self.tip = 2 - self.tip
+    def moverEspejoAleatorio(self, rango):
+        intervalo = np.deg2rad(rango)
+
+        self.tilt += np.random.randint(-10,10)*(intervalo/10)
+        while self.tilt > intervalo:
+            self.tilt = self.tilt-2*intervalo
+        while self.tilt < -intervalo:
+            self.tilt = 2*intervalo - self.tilt
+
+        self.tip += np.random.randint(-10,10)*(intervalo/10)
+        while self.tip > intervalo:
+            self.tip = self.tip-2*intervalo
+        while self.tip < -intervalo:
+            self.tip = 2*intervalo - self.tip
 
         self.lenteCircular()
