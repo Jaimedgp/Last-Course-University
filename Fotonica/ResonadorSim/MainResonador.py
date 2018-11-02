@@ -66,6 +66,7 @@ def ResonarEnEspejos(numReflexiones, movimiento=True):
     #primer rebote
     rebote1 = Espejo1.rebotes(Espejo1.lente)
     rebote1 = np.fft.fftshift(rebote1)
+    rebote2 = Espejo2.rebotes(rebote1) # rebote en el espejo2
 
     for i in range(0, numReflexiones-1):
         if movimiento:
@@ -73,7 +74,7 @@ def ResonarEnEspejos(numReflexiones, movimiento=True):
             # grado se simula moviendo un solo espejo en un rango de 0.5 grados
             Espejo1.moverEspejoAleatorio(0.5)
 
-        rebote1 = Espejo1.rebotes(rebote1) # rebote en el espejo1
+        rebote1 = Espejo1.rebotes(rebote2) # rebote en el espejo1
 
         rebote2 = Espejo2.rebotes(rebote1) # rebote en el espejo2
 
@@ -84,14 +85,14 @@ def ResonarEnEspejos(numReflexiones, movimiento=True):
 #####       MAIN DEL PROGRAMA       #####
 #########################################
 
-numEvents = 20 # numero de eventos con el movimiento aleatorio
-numReflexiones = 50 # numero de reflexiones en los espejos
+numEvents = 1 # numero de eventos con el movimiento aleatorio
+numReflexiones = 1 # numero de reflexiones en los espejos
 
 # Arrays para almanezar los campos de los eventos con movimiento aleatorio
 Aleatoria1 = [None for i in range(numEvents)] # en espejo 1
 Aleatoria2 = [None for i in range(numEvents)] # en espejo 2
 
-rebote1, rebote2 = ResonarEnEspejos(numReflexiones, False) # resonar sin mover espejos
+Intensidad1, Intensidad2 = ResonarEnEspejos(numReflexiones, False) # resonar sin mover espejos
 
 for i in range(len(Aleatoria1)):
 
@@ -108,7 +109,7 @@ IntAle1 = [ abs(np.max(Aleatoria1[i])) for i in range(len(Aleatoria1))]
 IntAle2 = [ abs(np.max(Aleatoria2[i])) for i in range(len(Aleatoria2))]
 
 guardarDatos(IntAle1, IntAle2, abs(np.max(AleMed1)), abs(np.max(AleMed2))
-             , abs(np.max(rebote1)), abs(np.max(rebote2)), "DatosEspejo")
+             , abs(np.max(Intensidad1)), abs(np.max(Intensidad2)), "DatosEspejo")
 
 #-------------------------------
 #   REPRESENTAR LOS CAMPOS
@@ -123,7 +124,7 @@ Graficas = RepresentarGraficas(x, y)
 
 # CAMPOS EN ESPEJO 1
 
-Graficas.insertarGrafica(221, rebote1) # representar campo sin movimiento
+Graficas.insertarGrafica(221, Intensidad1) # representar campo sin movimiento
 
 Graficas.insertarGrafica(223, AleMed1) # campo con movimiento
 
@@ -134,7 +135,7 @@ Graficas.guardarGraficas("Espejo1")
 Graficas.fig.clf() #borrar subplot actual en caso de existir
 
 
-Graficas.insertarGrafica(221, rebote2) # representar campo sin movimiento
+Graficas.insertarGrafica(221, Intensidad2) # representar campo sin movimiento
 
 Graficas.insertarGrafica(223, AleMed2) # campo con movimiento
 
