@@ -1,0 +1,210 @@
+\documentclass[twoside]{article}
+
+\usepackage[sc]{mathpazo} 
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage{multicol} % Used for the two-column layout of the document
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{mathtools}
+\usepackage{float} % Required for tables and figures in the multi-column environment - [H] needed
+\usepackage{hyperref} % For hyperlinks in the PDF with labels
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large\centering}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{Resonador óptico% based on TRACS 
+\hspace{4pt} $\bullet$ \hspace{4pt} Noviembre 2018 } % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+%----------------------------------------------------------------------------
+%	   TITLE SECTION
+%----------------------------------------------------------------------------
+
+\title{
+	\vspace{-15mm}
+	\fontsize{28pt}{10pt}
+	\selectfont\textbf{Simulación de las Vibraciones de un Resonador Óptico Confocal}% Article title
+}
+
+\author{
+	\large
+	\textsc{Jaime D\'iez Gonz\'alez-Pardo}\\[4mm]
+	\fontsize{28pt}{10pt} Universidad de Cantabria \\ % Your institution
+	%\thanks{A thank you or further information}\\[2mm] % Your name
+	\normalsize Fotónica \\ 
+	%\normalsize{Compañeros:} \textsc{NOMBRE COMPANEROS }\\%\normalsize \href{mailto:john@smith.com}{john@smith.com} % Your email address
+	%\vspace{5mm}
+}
+
+\date{ \today }
+
+
+%----------------------------------------------------------------------------
+%      · DOCUMENT
+%----------------------------------------------------------------------------
+
+\begin{document}
+
+
+	\maketitle % Insert title
+
+
+	\thispagestyle{fancy} % All pages have headers and footers
+
+%----------------------------------------------------------------------------
+%	  ABSTRACT
+%----------------------------------------------------------------------------
+
+	\begin{abstract}
+
+		\noindent% Dummy abstract text
+
+			TEXTO RESUMEN
+
+	\end{abstract}
+
+%----------------------------------------------------------------------------
+%	  ARTICLE CONTENTS
+%----------------------------------------------------------------------------
+
+	\begin{multicols}{2} % Two-column layout throughout the main article text
+
+		\section{Introducción} % Scope of the project = rad effects + minimization
+							 
+			TEXTO
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.5]{ResonadorConfocal.png}
+				\caption{\label{Img:widgets}Why not}
+			\end{figure}
+
+		\section{Desarrollo Experimental}
+
+			TEXTO
+
+		\section{Resultados}
+
+			TEXTO
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.38]{FiguraEspejo1.png}
+				\caption{\label{Img:widgets}Why not}
+			\end{figure}
+		
+		\section{Discusión}
+
+			TEXT
+
+		\section{Conclusiones}
+
+			TEXTO
+
+	\end{multicols}
+
+%----------------------------------------------------------------------------
+%     APPENDIX
+%----------------------------------------------------------------------------
+
+\newpage
+
+	    \appendix
+
+	    	\section{}
+	    		\label{appen:}
+	    		
+%----------------------------------------------------------------------------
+%     BIBLIOGRAPHY
+%----------------------------------------------------------------------------
+
+	\bibliographystyle{unsrt}
+	\bibliography{biblio}
+
+\end{document}
+
+
+%----------------------------------------------------------------------------
+%            TEMPLATES
+%----------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------
+%            how to insert an image
+%----------------------------------------------------------------------------
+
+%	\begin{figure}[H]
+%		\centering
+%		\includegraphics[scale= ]{nombre de la imagen.jpg}
+%		\caption{\label{Img:widgets}el pie de pagina que le quieras 	poner a la imagen}
+%	\end{figure}
+ 
+%----------------------------------------------------------------------------
+%            how to insert a table
+%----------------------------------------------------------------------------
+
+%	\begin{table}[H]
+%		\centering
+%		\begin{tabular}{|c|c|c|c|}
+%			\hline
+%			\centering
+%				Altura(h) & Distancia (d) & Elaboracion (e) & Longitud (l) \\
+%				($\pm0.5$ mm) & ($\pm0.5$ mm) & ($\pm0.5$ mm) & ($\pm0.5$ mm) \\ \hline
+%				 &  &  &  \\ \hline
+%				 &  &  &  \\ \hline
+%				 &  &  &  \\ \hline
+%				 &  &  &  \\ \hline
+%				 &  &  &  \\ \hline
+%		         &  &  &  \\ \hline
+%		\end{tabular}
+%		\caption{\label{Tab:widgets}pie de pagina que le quieras poner}
+%	\end{table}
+
+%----------------------------------------------------------------------------
+%             How to remove the label in equactions
+%----------------------------------------------------------------------------
+
+%	\begin{equation*}
+%		
+%	\end{equation*}
+
+%----------------------------------------------------------------------------
+%              How to set bibliography
+%----------------------------------------------------------------------------
+
+%\bibliographystyle{unsrt}
+%\bibliography{biblio}
+%
+%Then you have to set a .bib document such as the next template
+%
+%	@book{nickname,
+%	author = {},
+%	title = {},
+%	edition = {},
+%	year = {},
+%	volume = {},
+%	ISBN = {}
+%	}
+%
+%	@ARTICLE{nickname,
+%	author = {},
+%	title = {},
+%	year = {},
+%	volume = {},
+%	}
+
+
+%----------------------------------------------------------------------------
+%              END
+%----------------------------------------------------------------------------
