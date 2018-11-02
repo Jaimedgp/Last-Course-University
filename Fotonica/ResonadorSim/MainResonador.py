@@ -7,11 +7,11 @@ from mpl_toolkits.mplot3d import Axes3D
 from Espejo import EspejoResonador
 
 """
-        SIMULACION DE UN RESONADOR OPTICO COFOCAL CURVO
+        SIMULACION DE UN RESONADOR OPTICO CONFOCAL CURVO
 Se ha simulado un resonador cofocal curvo con espejos circulares estudiando la
 intesidad obtenida en los espejos tras un numero de reflexiones. Se ha
 comparado la intesidad obtenida utilizando los espejos alineados y con un
-movimiento aleatorio de los espejos de 0.5 grado. Para ello se ha tomado el
+movimiento aleatorio de los espejos de 0.25 grado. Para ello se ha tomado el
 campo promedio tras tomar 20 medidas con el movimiento aleatorio.
 
 @author Jaimedgp
@@ -69,8 +69,8 @@ def ResonarEnEspejos(numReflexiones, movimiento=True):
 
     for i in range(0, numReflexiones-1):
         if movimiento:
-            # El movimiento aleatorio de los dos espejos en un intervalo de 0.5 
-            # grado se simula moviendo un solo espejo en un rango de 1 grados
+            # El movimiento aleatorio de los dos espejos en un intervalo de 0.25 
+            # grado se simula moviendo un solo espejo en un rango de 0.5 grados
             Espejo1.moverEspejoAleatorio(0.5)
 
         rebote1 = Espejo1.rebotes(rebote1) # rebote en el espejo1
