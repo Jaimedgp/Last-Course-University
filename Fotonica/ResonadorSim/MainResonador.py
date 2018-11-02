@@ -48,7 +48,7 @@ def guardarDatos(IntAle1, IntAle2, IntMed1, IntMed2, Intensidad1,
                  I_0/I = %s\n" %(IntMed1, Intensidad1, (IntMed1/Intensidad1)))
         fw.write("Espejo 2:\n")
         fw.write("\tIntensidad Media = %s \t Intensidad = %s \t \
-                 I_0/I = %s\n" %(IntMed2, Intensidad2,(IntMed2/Intensidad2)))
+                 I_0/I = %s\n" %(IntMed2, Intensidad2, (IntMed2/Intensidad2)))
         fw.write("#########################################################\n")
 
         fw.write('Espejo 1 \t Espejo2 \n')
@@ -85,8 +85,8 @@ def ResonarEnEspejos(numReflexiones, movimiento=True):
 #####       MAIN DEL PROGRAMA       #####
 #########################################
 
-numEvents = 1 # numero de eventos con el movimiento aleatorio
-numReflexiones = 1 # numero de reflexiones en los espejos
+numEvents = 20 # numero de eventos con el movimiento aleatorio
+numReflexiones = 25 # numero de reflexiones en los espejos
 
 # Arrays para almanezar los campos de los eventos con movimiento aleatorio
 Aleatoria1 = [None for i in range(numEvents)] # en espejo 1
