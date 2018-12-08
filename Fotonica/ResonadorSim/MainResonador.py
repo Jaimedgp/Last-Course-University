@@ -134,7 +134,6 @@ Graficas.guardarGraficas("Espejo1")
 
 Graficas.fig.clf() #borrar subplot actual en caso de existir
 
-
 Graficas.insertarGrafica(221, Intensidad2) # representar campo sin movimiento
 
 Graficas.insertarGrafica(223, AleMed2) # campo con movimiento
