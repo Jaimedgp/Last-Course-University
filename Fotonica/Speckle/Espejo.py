@@ -44,6 +44,27 @@ class EspejoResonador():
 
                         self.lente[x][y] = 0.5*cmath.exp(1j*self.crv*r2)
 
+    def lenteHexagonal(self):
+        from hexagon import hexagono
+
+        hexag = hexagono(self.diamtr)
+
+        yInit = (self.sizeY-len(hexag[0]))/2
+        xInit = (self.sizeX-len(hexag))/2
+
+        yFini = self.sizeY-yInit
+        xFini = self.sizeX-xInit
+
+        self.lente[xInit:xFini, yInit:yFini] = hexag[:, :]
+
+        for x in range(0, self.sizeX):
+            rX = x-(self.sizeX/2)
+            for y in range(0,self.sizeY):
+                rY = (self.sizeY/2)-y
+                r2 = rX**2+rY**2
+
+                self.lente[x][y] = (self.lente[x][y]*cmath.exp(1j*self.crv*r2)*
+                                     cmath.exp(1j*(self.tip*rX + self.tilt*rY)))
 
     def rebotes(self, imagen):
         M2 = imagen*self.lente
@@ -66,4 +87,4 @@ class EspejoResonador():
         while self.tip < -intervalo:
             self.tip = 2*intervalo - self.tip
 
-        self.lenteCircular()
+        self.lenteHexagonal()
