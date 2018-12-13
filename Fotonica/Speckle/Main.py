@@ -1,33 +1,133 @@
-from Espejo import EspejoResonador as Espejo
-
+from Speckle import Speckle
+from Image import Image
+from Espejo import EspejoResonador
+from scipy.misc import imrotate
 import numpy as np
 import matplotlib.pyplot as plt
+import cmath
 
-sizeSmall = 16
-sizeBig = 512
+def fourierTrans(matrix):
+    fourier = np.fft.fft2(matrix)
+    return np.fft.fftshift(fourier)
 
-Pupila = Espejo(sizeSmall, sizeSmall, sizeSmall)
+def createImage(nameImagen, tmnhPeque, tmnhExtnd):
 
-speckel = np.zeros((sizeBig, sizeBig), dtype=np.complex_)
+    imagen = Image(nameImagen)
+    imagen.resizeImage(2*tmnhPeque, 2*tmnhPeque)
 
-rate = sizeBig/sizeSmall
+    extndImage = np.zeros((tmnhExtnd, tmnhExtnd), dtype=np.complex_)
 
-for i in range(0, rate):
-    Xpix = sizeSmall*i
-    for k in range(0, rate):
-        Ypix = sizeSmall*k
-        Pupila.moverEspejoAleatorio(2)
-        Pupilitas = Pupila.lente
-        speckel[Xpix:Xpix+sizeSmall,Ypix:Ypix+sizeSmall] = Pupilitas[:]
+    posicion = tmnhExtnd/2 - tmnhPeque
+    extndImage[posicion:-posicion, posicion:-posicion] = imagen.image[:, :]
 
-Lente = Espejo(sizeBig, sizeBig, 128)
-Lente.lenteCircular()
-optica = Lente.lente * speckel
+    return extndImage
 
-fourier = np.fft.fft2(optica)
-screen = np.fft.fftshift(fourier)
+def aberraciones(matrix):
+    intervalo = np.deg2rad(90)
+    xSize = len(matrix)
+    ySize = len(matrix[0])
+    for x in range(0, xSize):
+        rX = x-(xSize/2)
+        for y in range(0,ySize):
+            tilt = np.random.randint(-10,10)*(intervalo/10)
+            tip = np.random.randint(-10,10)*(intervalo/10)
+
+            rY = (ySize/2)-y
+            r2 = rX**2+rY**2
+
+            matrix[x][y] = (matrix[x][y]*cmath.exp(1j*(tip*rX + tilt*rY)))
+
+    return matrix
+
+#########################################
+#####       MAIN DEL PROGRAMA       #####
+#########################################
+
+tmnhPeque = 16
+tmnhGrand = 512
+numRepeticiones = 5
+
+ratePupilas = 0.5
+telescopeSize = 256#int(tmnhGrand*ratePupilas)
+
+Speckle = Speckle(tmnhPeque, telescopeSize, tmnhGrand)
+
+imagePhase = Speckle.getSpeckle(0,  True)
+
+image = createImage('images.png', int(tmnhGrand*ratePupilas)/2, tmnhGrand)
+
+image = image * imagePhase
+imageFFT = fourierTrans(image)
 
 fig = plt.figure()
-fig.add_subplot(121).imshow(abs(optica.imag), cmap=plt.cm.jet)
-fig.add_subplot(122).imshow(abs(screen.imag), cmap=plt.cm.jet)
+
+#---------------------------------------
+#            SIN SPECKLE
+#---------------------------------------
+
+espejo = EspejoResonador(tmnhGrand, tmnhGrand, tmnhGrand*ratePupilas)
+espejo.lenteCircular()
+lenteEspejo = espejo.lente
+
+screen = imageFFT * lenteEspejo
+
+fig.add_subplot(231).imshow(abs(image.imag), cmap=plt.cm.jet)
+fig.add_subplot(232).imshow(abs(lenteEspejo), cmap=plt.cm.jet)
+fig.add_subplot(233).imshow(imrotate(abs(screen), 180), cmap=plt.cm.jet)
+
+#---------------------------------------
+#            CON SPECKLE
+#---------------------------------------
+
+patron = Speckle.getSpeckle(0, False)
+modificar = np.zeros((tmnhGrand, tmnhGrand), dtype=np.complex_)
+
+for x in range(len(patron)):
+    for y in range(len(patron[0])):
+        if patron[x][y] != 0 and image[x][y] != 0:
+            phase = -(cmath.phase(image[x][y]))
+            modificar[x][y] = 1*cmath.exp(1j*(phase))
+
+        else:
+            modificar[x][y] = 0
+
+result = modificar * image
+
+resultFFT = fourierTrans(result)
+screen = np.fft.fft2(resultFFT)
+
+fig.add_subplot(234).imshow(abs(image.imag), cmap=plt.cm.jet)
+fig.add_subplot(235).imshow(abs(modificar.imag), cmap=plt.cm.jet)
+fig.add_subplot(236).imshow(imrotate(abs(screen), 180), cmap=plt.cm.jet)
+plt.show()
+
+#---------------------------------------
+#            SPECKLE ALEATORIO
+#---------------------------------------
+
+image = createImage('images.png', int(tmnhGrand*ratePupilas)/2, tmnhGrand)
+
+image = aberraciones(image) * lenteEspejo
+
+patron = Speckle.getSpeckle(0, False)
+modificar = np.zeros((tmnhGrand, tmnhGrand), dtype=np.complex_)
+
+for x in range(len(patron)):
+    for y in range(len(patron[0])):
+        if patron[x][y] != 0 and image[x][y] != 0:
+            phase = -(cmath.phase(image[x][y]))
+            modificar[x][y] = 1*cmath.exp(1j*(phase))
+
+        else:
+            modificar[x][y] = 0
+
+result = modificar * image
+
+resultFFT = fourierTrans(result)
+screen = np.fft.fft2(resultFFT)
+
+fig = plt.figure()
+fig.add_subplot(131).imshow(abs(image.imag), cmap=plt.cm.jet)
+fig.add_subplot(132).imshow(abs(modificar.imag), cmap=plt.cm.jet)
+fig.add_subplot(133).imshow(imrotate(abs(screen), 180), cmap=plt.cm.jet)
 plt.show()
