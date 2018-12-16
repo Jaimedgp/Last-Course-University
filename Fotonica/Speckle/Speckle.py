@@ -46,9 +46,12 @@ class Speckle:
                     Pupil.moverEspejoAleatorio(90)
 
                 smllPupil = Pupil.lente
-                pupils.append(smllPupil)
 
-                pupilMesh[xPix:xPix+self.xSz, yPix:yPix+self.ySz] = smllPupil[:]
+                pupil = np.zeros((self.rate*self.xSz, tlsSz), dtype=np.complex_)
+                pupil[xPix:xPix+self.xSz, yPix:yPix+self.ySz] = smllPupil[:]
+                
+                pupils.append(pupil)
+                pupilMesh += pupil
 
         self.pupils[m] = pupils
 
@@ -73,7 +76,7 @@ class Speckle:
 
         pupilMesh = self.pupilMesh(0, rand) + self.pupilMesh(1, rand)
 
-        if self.rate % 2 != 0:
+        if self.rate % 2 == 0:
             pupilMesh[self.xSz/2:, :] = pupilMesh[: -self.xSz/2, :]
         elif self.rate % 2 == 0:
             pupilMesh[:, :-self.ySz/4] = pupilMesh[:, self.ySz/4:]
