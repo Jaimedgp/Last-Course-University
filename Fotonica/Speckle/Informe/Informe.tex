@@ -103,28 +103,96 @@
 						\\
 						D/r_0 << 1 & \rightarrow & Imagen=Airy
 					\end{matrix}
+					\label{eq:airy}
 				\end{equation}
 
 		\section{Desarrollo Experimental}
 
 			El estudio del efecto Speckle producido por diferencias en la fase del frente de onda se ha realizado mediante una simulación a partir del código \cite{Speckle} escrito por el alumno en el lenguaje Python.
 
-			Para crear cada uno de los espejos o pupilas se ha utilizado una clase llamada Espejo que crea los espejos teniendo en cuenta el tamaño del campo, el tamaño del espejo o pupila, forma del espejo, curvatura e inclinación. La forma utilizada para las puìlas pequeñas ha sido la de un hexágono, ya que ésta te permite poder cubrir todo el espacio sin dejar huecos, la forma del espejo grande ha sido circular En el apéndice \ref{appen:Espejo} se muestra como se ha obtenido la matriz para el espejo grande.
+			Para crear cada uno de los espejos o pupilas se ha utilizado una clase llamada Espejo que crea los espejos teniendo en cuenta el tamaño del campo, el tamaño del espejo o pupila, forma del espejo e inclinación. La forma utilizada para las puilas pequeñas ha sido la de un hexágono, ya que ésta te permite poder cubrir todo el espacio sin dejar huecos, la forma del espejo grande ha sido circular. En el apéndice \ref{appen:Espejo} se muestra como se ha obtenido la matriz para el espejo grande. El resultado de la simulación obtenido corresponde al rebote de la imagen en el espejo, que equivalente a la transformada de Fourier.
 
-			
+			En el caso del espejo formado por pupilas más pequeñas, se ha creado una matriz del tamaño del campo a estudiar relleno de las upilas pequeñas de tal manera que cubran toda la matriz, y se ha multiplicado dicha matriz por la del espejo grande compuesta de 0 y 1.
 
+			La simulación se ha dividido en dos partes: En la primera parte se ha realizado el estudio considerando una fuente puntual utilizando tres espejos diferentes y en la segunda parte se ha tratado de corregir una imagen, a la que se le han aplicado cambios en la fase de forma aleatoria, aplicando la fase contraria en un espejo formado por pupilas pequeñas y recuperando dicha imagen.
+
+			En la primera parte el primer espejo utilizado ha consistido en un único espejo circular sin fase, el segundo espejo utilizado se ha realizado utilizando pupilas del tamaño del espejo grande pero con forma hexagonal y con fase; y el último espejo utilizado ha consistido de varias pupilas hexagonales más pequeñas que el espejo grande y con fase aleatoria.
 
 		\section{Resultados}
 
-			TEXTO
+			Durante toda la simulación se ha utilizado un campo (tamaño de la matriz) cuadrado de $512\times512$
+
+			\subsection{Fuente Puntual}
+
+				Para esta primera parte se ha utilizado un tamaño de espejo grande de diámetro $D = 64$.
+
+				La primera simulación realizada ha sido sin incluir pupilas más pequeñas ni ningún tipo de fase. En la Figura \ref{Img:airy-normal} se muestran imágenes del espejo utilizado (gráfica de la izquierda) y del campo obtenido (gráfica de la derecha).
+
+					\begin{figure}[H]
+						\centering
+						\includegraphics[scale=0.2]{Airy.png}
+						\caption{\label{Img:airy-normal}Espejo utilizado sin pupilas ni fase (gráfica de la izquierda) y del campo obtenido (gráfica de la derecha).}
+					\end{figure}
+
+				En la segunda simulación realizada se han introducido pupilas con una cierta fase aleatoria con forma de hexágono para formar el espejo grande, en este caso el tamaño de las pupilas es el mismo que el del espejo grande $r_0 = D = 64$.
+
+				En la Figura \ref{Img:airy-fase} se muestran imágenes del espejo utilizado (gráfica de la izquierda) y del campo obtenido (gráfica de la derecha).
+
+					\begin{figure}[H]
+						\centering
+						\includegraphics[scale=0.2]{Airy_Fase.png}
+						\caption{\label{Img:airy-fase}Espejo utilizado con pupilas con fase de tamaño $r_0 = D = 64$ (gráfica de la izquierda) y del campo obtenido (gráfica de la derecha).}
+					\end{figure}
+
+				Por último, se han utilizado varias pupilas de tamaño menor a $D$ para formar el espejo, en este caso se han utilizado pupilas de tamaño $r_0 = 8$ y fase aleatroia para cada una de ellas.
+
+				En la Figura \ref{Img:speckle} se muestran imágenes del espejo utilizado (gráfica de la izquierda) y del campo obtenido (gráfica de la derecha).
+
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.2]{SpeckleTotal.png}
+					\caption{\label{Img:speckle}Espejo utilizado con pupilas con fase de tamaño $r_0 = 8$ (gráfica de la izquierda) y del campo obtenido (gráfica de la derecha).}
+				\end{figure}
+
+			\subsection{Imagen Fuente}
+
+				Por último, se ha tratado de simular la corrección de speckle de una imagen a la que se le ha modificado de forma aleatoria la fase en cada punto. Para poder obtener la imagen real se ha aplicado la transformada de Fourier dos veces.
+
+				Para poder observar la diferencias al aplicar la corrección de speckle o no se han realizado las simulaciones dos veces, la primera con un espejo sin pupilas ni fase (coma la utilizada en la imagen \ref{Img:airy-normal}) y otra con pupilas más pequeñas y con fase contraria a la de la imagen fuente (como la utilizada en la imagen \ref{Img:speckle}).
+
+				Para esta parte el tamaño del espejo grande utilizado es de $D = 256$ y, para el caso del espejo con pupilas, el tamaño de las pupilas de $r_0 = 16$.
+
+				En la Figura \ref{Img:nasa} se muestran las gráficas obtenidas. La primera columna corresponde a la imagen fuente, la segunda columna al espejo utilizado y la columna de la derecha a la imagen obtenida. La fila de arriba es sin aplicar la corrección de speckle y la de abajo con la corrección. 
+
+				\end{multicols}
+					\begin{figure}[H]
+						\centering
+						\includegraphics[scale=0.24]{Nasa.png}
+						\caption{\label{Img:nasa}Procesamiento de una imagen con fase aleatoria utilizando el método de speckle. La fila de arriba corresponde al procesamiento de imagen sin corrección y la de abajo con corrección mediante pupilas. En la primera columna se muestran las imagenes originales, en la segunda columna el espejo utilizado para su procesamiento y en la tercera columna la imagen obtenida.}
+					\end{figure}
+				\begin{multicols}{2}
 		
 		\section{Discusión}
 
-			TEXT
+			Se han estudiado las intensidades obtenidas a partir de frentes de onda con fases aleatorias tratando de simular los efectos observados en la atmósfera. 
+
+			En la primera parte se ha estudiado este hecho considerando una fuente puntual, de la cuál se sabe que se ha de obtener la mancha de Airy. En la primera simulación no se ha modificado la fase, obteniendose la mancha de Airy como se puede ver en la figura \ref{Img:airy-normal}. Tras esto se ha decidido utlizar dos espejos formados por pupilas con fases aleatorias. En el primer caso se han utilizado pupilas con un tamaño aproximado al del espejo grande $D \approx r_0$, obteniendo nuevamente la mancha de Airy pero desplazada del centro y con algunas intensidades diferentes como se puede observar en la figura \ref{Img:airy-fase}. Estas pequeñas diferencias con la mancha de Airy de la primera simulación pueden ser debidas a que la forma de la pupila era hexagonal, por lo que una sola pupila no cubría todo el espacio del espejo y aparecían partes de las pupilas continuas en los bordes. Esta pupilas contienen una fase diferente a la de la pupila central, lo que puede originar dichas diferencias. Además, se observa que la pupila central no está perfectamente centrada. 
+
+			El problema de centrar la pupila se podría haber solucionado modificando el código para ello. De igual manera, se podrían haber utilizado pupilas circulares para este caso. Sin embargo, interesaba escribir un código único que permitiese estudiar el fenómeno para diferentes variables. Por ello, de haber utilizado pupilas circulares, en posteriores simulaciones en las que la pupilas son menores, se hubiesen encontrado espacios vacíos.
+
+			En la siguiente simulación se utilizaro  pupilas de tamaño mucho menos al del espejo, siendo 8 veces más pequeñas. Para este caso, se ha podido observar los efectos que produce tener difernecias en la fase de un mismo frente de onda a la hora de obtener su imagen, ya que en la figura \ref{Img:speckle} en la que se muestra el resultado de la simulación, se ha perdido completamente la mancha de Airy.
+
+			Con esta primera parte se ha podido comprobar mediante simulación las aproximaciones de la ecuación \ref{eq:airy}, observando como a medida que $r_0$ disminuye respecto a $D$, se pierde la mancha de Airy.
+
+			Por último, en la última simulación se ha tratado de realizar el procesamiento de imagen de una imagen fuente a la que se le ha aplicado diferentes fases. 
+
+			Se ha podido observar como para este caso, al procesar la imagen sin ninguna correscciónutilizando un espejo sin fase, se pierde completamente la imagen. Esto no es del todo cierto, ya que se pueden intuir partes de la imagen original, ya que la forma de introducirle un desfase a la imagen a sido mediante hexagonos como los de la pupila. Sin embargo, no se puede concluir que se haya obtenido la imagen inicial.
+
+			No obstante, cuando se le ha aplicado un espejo formado por pupilas con una cierta inclinación de tal manera que se aplicase un desfase inverso al de la imagen original, corrigiendo el Speckle, sí se ha podido obtener nuevamente la imagen original exactamente igual.
 
 		\section{Conclusiones}
 
-			TEXTO
+			Se ha podio estudiar el fenómeno de Speckle pudiendo comprobar mediante una simulación simple las aproximaciones y límites de este fenómeno que se muestran en la ecuación \ref{eq:airy}. Además, se ha podido observar el efecto que este produce a la hora de observar una imagen, volviendo tan dificill las observaciones de estrellas debido a la acción de la atmósfera. Así mismo, se ha simulado las correcciones que se han de realizar a las imagenes para obtener la imagen original.
 
 	\end{multicols}
 
