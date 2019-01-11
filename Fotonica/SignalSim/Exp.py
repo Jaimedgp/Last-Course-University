@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 AmpI = [10000, 100]
 M = [0.1, 0.5, 1]
-T = 0.001
+T = 0.01
 P = 0.1
 N = 10000
 fr = 1/P
