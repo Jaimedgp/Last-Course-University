@@ -1,0 +1,54 @@
+Temperature: 500.0 K
+Lattice Length: 10
+Number of interaction parameters: 2
+J[1]: 2.243052E-22 J
+J[2]: 1.121526E-22 J
+MCS: 100000
+Therm: 25000
+Skip: 1000
+H: 0.01 A/m
+Temperature: 500.0 K
+Lattice Length: 10
+Number of interaction parameters: 2
+J[1]: 2.243052E-22 J
+J[2]: 1.121526E-22 J
+MCS: 100000
+Therm: 25000
+Skip: 1000
+H: 0.01 A/m
+Temperature: 500.0 K
+Lattice Length: 10
+Number of interaction parameters: 2
+J[1]: 2.243052E-22 J
+J[2]: 1.121526E-22 J
+MCS: 100000
+Therm: 25000
+Skip: 1000
+H: 0.01 A/m
+Temperature: 500.0 K
+Lattice Length: 10
+Number of interaction parameters: 2
+J[1]: 2.243052E-22 J
+J[2]: 1.121526E-22 J
+MCS: 100000
+Therm: 25000
+Skip: 1000
+H: 0.01 A/m
+Temperature: 500.0 K
+Lattice Length: 10
+Number of interaction parameters: 2
+J[1]: 2.243052E-22 J
+J[2]: 1.121526E-22 J
+MCS: 100000
+Therm: 25000
+Skip: 1000
+H: 0.01 A/m
+Temperature: 500.0 K
+Lattice Length: 10
+Number of interaction parameters: 2
+J[1]: 2.243052E-22 J
+J[2]: 1.121526E-22 J
+MCS: 100000
+Therm: 25000
+Skip: 1000
+H: 0.01 A/m

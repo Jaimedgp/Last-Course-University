@@ -1,0 +1,7 @@
+latticeLength	10
+temperature	-279.67	F
+therm	25000
+H	0.01	A/m
+skip	1000
+mcs	100000
+J	2.0 2.2430472E-15 1.1215236E-15	erg

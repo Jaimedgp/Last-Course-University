@@ -1,0 +1,7 @@
+latticeLength	10
+temperature	900	K
+therm	25000
+H	0.01	A/m
+skip	1000
+mcs	100000
+J	2.0 2.243052E-22 1.121526E-22	J

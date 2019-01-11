@@ -1,0 +1,211 @@
+package r2ms.longSim.modC;
+
+import r2ms.common.ILongSimulationManager;
+import r2ms.common.IResults;
+import r2ms.common.InputData;
+import r2ms.simIsing.modHe.He;
+
+public class C implements ILongSimulationManager {
+	/**
+	 * Enumeration that contains every possible state of the simulation.
+	 */
+	enum RunningState {
+		UNINTERRUPTIBLE,
+		/**
+		 * This is the state used to indicate non concurrent simulations that will run
+		 * to completion and hence are not managed.
+		 */
+
+		READY,
+		/**
+		 * Indicates that the simulation is ready to be launched
+		 */
+
+		PAUSE,
+		/**
+		 * This state indicates that the simulation should be stopped and stay stopped.
+		 */
+
+		PAUSED,
+		/**
+		 * This state indicates that the simulation has been stopped and stay stopped.
+		 */
+
+		RUNNING,
+		/**
+		 * This is the normal state when the simulation runs in a separate thread
+		 */
+
+		DONE,/**
+				 * This is the state that indicates that the simulation has finished and is
+				 * waiting for its results to be recalled. This is necessary when the simulation
+				 * runs in a separate thread
+				 */
+		;
+	}
+
+	private RunningState runningState = RunningState.READY; // Actual state of the system. It is initialized to ready,
+	// waiting to be launch.
+	private int step; // Number of step in which the simulation is in
+	private int nsteps;// Total number of steps of the simulation
+	private Thread simulationThread; // Thread in which the simulation is going to be ran in
+	private InputData[] experiment; // Input data needed to run the simulation
+	private IResults results; // Results of the simulations
+	private He sim; // Simulation to be run
+
+	@Override
+	public void run() {
+		runningState = RunningState.RUNNING; // The state is changed to running
+
+		// If the number of steps is the same as the number of experiments, the method
+		// stepDone must be called in here. If it is not, stepDone is called elsewhere.
+		if (nsteps == experiment.length) {
+			// Run simulation
+			for (int i = 0; i < experiment.length; i++) {
+				sim = new He();
+				sim.run(experiment[i], results);
+				stepDone();
+			}
+		} else {
+			// Run simulation
+			for (int i = 0; i < experiment.length; i++) {
+				sim = new He();
+				sim.run(experiment[i], results);
+			}
+		}
+		// Set the state to DONE after finishing
+		runningState = RunningState.DONE;
+	}
+
+	@Override
+	public boolean startSimulation(InputData[] experiment, int nSteps, IResults results) {
+		// Variable initialization
+		this.step = 0; // Put the step to 0 as it is in the initial state
+		this.nsteps = nSteps; // Set the total number of steps
+		this.experiment = experiment; // Set the input data
+		simulationThread = new Thread(this); // Set the thread
+		this.results = results; // Set the results
+		// If the thread is not obtained or the state of the system is different to
+		// READY, do not launch and return false
+		if (simulationThread == null || runningState != RunningState.READY) {
+			return false;
+		}
+		// Start the simulation
+		simulationThread.start();
+		return true;
+	}
+
+	@Override
+	public double currentSimulationFraction() {
+		// If the simulation is finished, return 1 to avoid problems of rounding up
+		if (runningState == RunningState.DONE) {
+			return 1.0;
+		}
+
+		// Fraction of the simulation completed
+		return ((double) step) / ((double) nsteps);
+	}
+
+	@Override
+	public boolean pauseSimulation() {
+		// If the state of the simulation is not RUNNING, the simulation can not be
+		// paused and return false
+		if (runningState != RunningState.RUNNING) {
+			return false;
+		}
+		// Put the state to PAUSE
+		runningState = RunningState.PAUSE;
+		// Keep waiting until the simulation is paused. Check every 200 ms
+		while (runningState != RunningState.PAUSED) {
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean continueSimulation() {
+		// If the state of the simulation is not PAUSED, the simulation can not be
+		// continued and return false
+		if (runningState != RunningState.PAUSED) {
+			return false;
+		}
+		// Put the state to READY
+		runningState = RunningState.READY;
+		// Keep waiting until the simulation is running. Check every 200 ms
+		while (runningState != RunningState.RUNNING) {
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public String saveSimulation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void continueSavedSimulation(String savedSimFile) throws FileNotFound, FileCorrupted {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	/**
+	 * This method can also be used to check whether the simulation is completed. If
+	 * it is, it will return the results of the simulation. If it is not, it will
+	 * return null.
+	 */
+	public IResults getSimulationResults() {
+		// If the simulation is finished, the results are returned
+		if (runningState == RunningState.DONE) {
+			// Results obtained
+			return results;
+		}
+		// If the simulation is not finished, return null
+		return null;
+	}
+
+	@Override
+	public String getSimulationIfSaved() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	/**
+	 * This method is called in the simulation every time progress is wanted to be
+	 * indicated. It can be called either at the end of every simulation or at the
+	 * end of every MonteCarlo sweep. The only difference is the total number of
+	 * steps. In addition, it checks if a change in the state of the system is
+	 * wanted to be made.
+	 */
+	public void stepDone() {
+		step++; // Increase the step in which the simulation is in
+		// Check if the simulation is waiting to be paused
+		if (runningState == RunningState.PAUSE) {
+			// Change the state to PAUSED
+			runningState = RunningState.PAUSED;
+			// Keep waiting until the state is changed. Check every 200 ms
+			while (runningState == RunningState.PAUSED) {
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					System.out.println("Interrupted Exception");
+				}
+			}
+			// Check if the simulation is waiting to be launched
+		} else if (runningState == RunningState.READY) {
+			// Change the state to RUNNING
+			runningState = RunningState.RUNNING;
+		}
+	}
+
+}

@@ -1,0 +1,7 @@
+latticeLength	10
+temperature	600	K
+therm	25000
+H	0.01	A/m
+skip	1000
+mcs	100000
+J	2.0 0.0014 0.0007	eV
