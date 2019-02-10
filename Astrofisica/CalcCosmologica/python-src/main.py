@@ -1,13 +1,34 @@
-import matplotlib.pyplot as plt
+from representarGraf import Representar
+from CalcCosmlgc import CalcCosmologica
 import numpy as np
-from CalcCosmologica import CalcCosmologica
 
-z = np.asarray([float(i) for i in range(10)])
+universos = {"Actual": CalcCosmologica(radOmega = 0.0,
+                                       mateOmega = 0.315,
+                                       lmbdOmega = 0.685,
+                                       hubble0 = 0.06888),
+             "Radiacion": CalcCosmologica(radOmega = 1.0,
+                                         mateOmega = 0.0,
+                                         lmbdOmega = 0.0,
+                                         hubble0 = 0.07),
+             "Materia": CalcCosmologica(radOmega = 0.0,
+                                         mateOmega = 1.0,
+                                         lmbdOmega = 0.0,
+                                         hubble0 = 0.07),
+             "$\Lambda$": CalcCosmologica(radOmega = 0.0,
+                                         mateOmega = 0.0,
+                                         lmbdOmega = 1.0,
+                                         hubble0 = 0.07)}
 
-calc = CalcCosmologica(0,0.24, 0.76, 71.0)
+z = np.linspace(0, 15, 1000)
+t = np.linspace(0, 50, 1000)
 
-t = calc.time()
-a = calc.a(z)
+graficas = Representar(universos, z, t)
 
-plt.plot(t, a)
-plt.show()
+#graficas.distanciaDimAngular()
+#graficas.distanciaDimLuminosidad()
+#graficas.hubble()
+#graficas.factorEscala()
+#graficas.hubble()
+#graficas.radioHubble()
+#graficas.horizntParticulas()
+graficas.edadUniverso()
