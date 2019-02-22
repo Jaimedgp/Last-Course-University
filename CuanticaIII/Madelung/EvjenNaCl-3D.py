@@ -14,16 +14,23 @@ def crearRed(zona):
     red = np.zeros((length, length, length))
 
     for i in range(length):
-        for j in range(length):
-            for k in range(length):
-                if i < length-1:
+        if i == 0:
+            for j in range(length):
+                for k in range(length):
                     xyz = (j+k)/zona
-                else:
-                    xyz = (i/zona+j/zona+k/zona)
-                if j == 0:
-                    xyz += 1
+                    if j == 0:
+                        xyz += 1
 
-                if xyz != 0:
+                    red[i][j][k] += 1/(2.0**xyz)
+        elif i < length-1:
+            red[i] = red[0]
+        else:
+            for j in range(length):
+                for k in range(length):
+                    xyz = (i/zona+j/zona+k/zona)
+                    if j == 0:
+                        xyz += 1
+
                     red[i][j][k] += 1/(2.0**xyz)
     return red
 
@@ -59,7 +66,7 @@ def calcMadelung(red):
     return madelung
 
 madelung = 0
-zonas = [i for i in range(1, 50)]
+zonas = [i for i in range(1, 101)]
 #madelungArray = []
 
 for zona in zonas:
