@@ -1,7 +1,7 @@
 """
     Programa para la obtencion de la constante de Madelung para una esctructura
-    2-D de NaCl mediante el procedimiento de Evjen. se realiza el calculo
-    iterativo hasta que la contribucion de la zona sea menor que <0.001
+    3-D de NaCl mediante el procedimiento de Evjen. Se realiza el calculo
+    iterativo para un numero dado de zonas de carga nula.
 
     (x, y, z) => (k, j, i) siendo z la profundidad, y la altura y x la anchura
 """
@@ -66,7 +66,7 @@ def calcMadelung(red):
     return madelung
 
 madelung = 0
-zonas = [i for i in range(1, 101)]
+zonas = [i for i in range(1, 40)]
 #madelungArray = []
 
 for zona in zonas:
