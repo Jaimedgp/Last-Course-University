@@ -43,13 +43,13 @@ class Speckle:
                 yPix = k*yInterval + yStart
 
                 if random:
-                    Pupil.moverEspejoAleatorio(90)
+                    Pupil.moverEspejoAleatorio(30)
 
                 smllPupil = Pupil.lente
 
                 pupil = np.zeros((self.rate*self.xSz, tlsSz), dtype=np.complex_)
                 pupil[xPix:xPix+self.xSz, yPix:yPix+self.ySz] = smllPupil[:]
-                
+
                 pupils.append(pupil)
                 pupilMesh += pupil
 
@@ -86,5 +86,5 @@ class Speckle:
         bgPupil = Espejo(self.bgSz, self.bgSz, self.tlscpSz, curvatura=curv)
         bgPupil.lenteCircular()
         optic = pupilMesh*bgPupil.lente
-        
+
         return optic

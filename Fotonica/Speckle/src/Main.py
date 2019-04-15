@@ -44,7 +44,7 @@ def speckleAleatorio(Speckle):
     """            SPECKLE ALEATORIO          """
     """---------------------------------------"""
 
-    image = createImage('images.png', int(tmnhGrand*ratePupilas)/2, tmnhGrand)
+    image = createImage('../images.png', int(tmnhGrand*ratePupilas)/2, tmnhGrand)
 
     image = aberraciones(image) * lenteEspejo
 
@@ -98,7 +98,7 @@ fig.add_subplot(122).imshow(abs(imageFFT.real), cmap=plt.cm.jet)
 fig.add_subplot(122).set_title("Mancha de Airy")
 fig.add_subplot(121).imshow(abs(imagePhase.real), cmap=plt.cm.jet)
 fig.add_subplot(121).set_title("Pupila")
-fig.savefig('./Graficas/Airy_Fase.png', dpi=600)
+fig.savefig('../Graficas/Airy_Fase.png', dpi=600)
 
 #---------------------------------------
 #   APROXIMACION MANCHA AIRY SIN FASE
@@ -121,7 +121,7 @@ fig.add_subplot(122).imshow(abs(imageFFT.real), cmap=plt.cm.jet)
 fig.add_subplot(122).set_title("Mancha de Airy")
 fig.add_subplot(121).imshow(abs(imagePhase.real), cmap=plt.cm.jet)
 fig.add_subplot(121).set_title("Pupila")
-fig.savefig('./Graficas/Airy.png', dpi=600)
+fig.savefig('../Graficas/Airy.png', dpi=600)
 
 #---------------------------------------
 #   Extremo MANCHA AIRY SIN FASE
@@ -144,7 +144,7 @@ fig.add_subplot(122).imshow(abs(imageFFT.real), cmap=plt.cm.jet)
 fig.add_subplot(122).set_title("Mancha de Airy")
 fig.add_subplot(121).imshow(abs(imagePhase.real), cmap=plt.cm.jet)
 fig.add_subplot(121).set_title("Pupila")
-fig.savefig('./Graficas/SpeckleTotal.png', dpi=600)
+fig.savefig('../Graficas/SpeckleTotal.png', dpi=600)
 
 #---------------------------------------
 #          OBTENCION DE IMAGEN
@@ -160,7 +160,7 @@ Speckle = Speckle(tmnhPeque, telescopeSize, tmnhGrand)
 
 imagePhase = Speckle.getSpeckle(0,  True)
 
-image = createImage('images.png', int(tmnhGrand*ratePupilas)/2, tmnhGrand)
+image = createImage('../images.png', int(tmnhGrand*ratePupilas)/2, tmnhGrand)
 
 image = image * imagePhase
 imageFFT = fourierTrans(image)
@@ -212,5 +212,5 @@ fig.add_subplot(235).imshow(abs(modificar.imag), cmap=plt.cm.jet)
 fig.add_subplot(235).set_title("Pupila con Speckle")
 fig.add_subplot(236).imshow(imrotate(abs(screen), 180), cmap=plt.cm.jet)
 fig.add_subplot(236).set_title("Imagen Obtenida")
-fig.savefig('./Graficas/Nasa.png', dpi=600)
+fig.savefig('../Graficas/Nasa.png', dpi=600)
 plt.show()

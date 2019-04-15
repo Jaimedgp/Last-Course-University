@@ -39,7 +39,7 @@ def filtroPasoBajo(self, imagenToProcess=0):
 ##########################################
 
 # Se abre la imagen
-imagenPath = 'Imagen2.jpg'
+imagenPath = "/home/jaimedgp/Desktop/logo.png"#'Imagen2.jpg'
 image = imread(imagenPath, False, 'L')
 xSize, ySize = len(image), len(image[1])
 

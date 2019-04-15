@@ -1,0 +1,476 @@
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+
+\documentclass[xcolor=dvipsnames]{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%%\usecolortheme{dolphin}
+\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{multimedia}
+\usepackage{wrapfig}
+\usepackage{multicol}
+\setbeamersize{text margin left=0.5mm} 
+
+\setbeamercolor{frametitle}{bg=lightgray}
+\setbeamercolor{logo}{bg=gray}
+\setbeamercolor{section in sidebar}{fg=black} 
+\setbeamercolor{section in sidebar shaded}{fg=gray}
+\setbeamercolor{title}{fg=Black}
+\setbeamercolor{author in slidebar}{fg=black}
+\newcommand{\pu}{\partial^\mu}
+\newcommand{\pd}{\partial_\mu}
+\newcommand{\pun}{\partial^\nu}
+\newcommand{\pdn}{\partial_\nu}
+\newcommand{\Aun}{A^\nu}
+\newcommand{\Adn}{A_\nu}
+\newcommand{\Au}{A^\mu}
+\newcommand{\Ad}{A_\mu}
+\newcommand{\Bun}{B^\nu}
+\newcommand{\Bdn}{B_\nu}
+\newcommand{\Bu}{B^\mu}
+\newcommand{\Bd}{B_\mu}
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Polarización]{Polarización de Partículas Masivas \\ y sin Masa (Fotón)} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author[JaimeDGP]{Jaime Díez González-Pardo } % Your name
+
+\institute[UC]{Universidad de Cantabria}
+
+\date{ \today} % Date, can be changed to a custom date
+
+	\begin{document}
+		\centering
+	
+		\begin{frame}
+			\titlepage % Print the title page as the first slides
+		\end{frame}
+		\section{Inv. Gauge}
+			\begin{frame}
+				\frametitle{Invariancia Gauge}
+
+				\only<1->{
+					\begin{equation*}
+						\textrm{Cuadrivector potencial eléctrico } \Rightarrow \boxed{\Au = (\phi, \mathbf{A})}
+					\end{equation*}
+					\begin{equation*}
+						\begin{matrix}
+							\mathcal{L}_0 = - \frac{1}{4} F^{\mu\nu}F_{\mu\nu} & \Rightarrow & \pd\pu\Aun - \pun\pd\Au = j^\nu 
+						\end{matrix}
+					\end{equation*}}
+
+				\only<2->{\begin{equation*}
+						\textrm{Invarianza Gauge } \Rightarrow \left \{ \begin{matrix}
+							\boxed{\Ad \rightarrow \Ad' = \Ad - \pd\chi}
+							\\
+							\pu\Ad' = \pu\Ad - \Box \chi
+							\\
+							\begin{matrix}
+								\Box \chi = \pu\Ad & | & \pu \Ad' = 0
+							\end{matrix}
+						\end{matrix}\right .
+					\end{equation*}}
+
+				\only<2->{\begin{equation*}
+					\begin{matrix}
+						\textrm{Operador D'Alembertiano } & \Rightarrow & 
+						\begin{bmatrix}
+							\Box \equiv g^{\mu\nu}\partial_\mu\partial_\nu = \partial_\mu\partial^\mu
+						\end{bmatrix}
+					\end{matrix}
+				\end{equation*}}
+
+				\only<3->{\hrule}
+
+				\only<3->{\begin{equation*}
+						\begin{matrix}
+							\textrm{Lorenz gauge condition} & & & & \textrm{Lorenz gauge}
+							\\
+							\\
+							\boxed{\pu\Ad = 0} & & & & \boxed{\Box \Au \equiv \pdn\pun\Au = j^\mu}
+						\end{matrix}
+					\end{equation*}
+				}
+			\end{frame}
+
+		\section{El Fotón}
+
+			\begin{frame}
+				\frametitle{Polarizaci\'on del Fot\'on}
+
+				\only<1->{Se estudia el fot\'on en ausencia de carga $j^\mu = 0$
+
+				\vspace{-4mm}
+					\begin{equation*}
+						\Box \Au = j^\mu = 0
+					\end{equation*}}
+
+				\only<2->{Se obtiene una ecuaci\'on de ondas con soluci\'on: $\Au = \epsilon^\mu(q) e^{-iqx}$
+
+					\begin{equation*}
+						\begin{matrix}
+							\Box \Au = \Box (\epsilon^\mu e^{-iqx}) = -q^2\epsilon^\mu e^{-iqx}=0 & \Rightarrow & q^2 = m^2 = 0
+						\end{matrix}
+					\end{equation*}}
+
+				\only<3->{Aplicando la condici\'on gauge de Lorenz
+
+					\begin{equation*}
+						\begin{matrix}
+							\pd\Au = \pd(\epsilon^\mu(q) e^{-iqx}) = -iq_\mu\epsilon^\mu e^{-iqx} & \Rightarrow  \boxed{q_\mu\epsilon^\mu = 0}
+							\\
+							& \downarrow
+							\\
+							&  \textrm{3 grados de libertad}
+						\end{matrix}
+					\end{equation*}}
+			\end{frame}
+
+			\begin{frame}
+				\frametitle{Polarizaci\'on del Fot\'on}
+
+				\only<1->{Imponiendo la condici\'on de Lorenz} \vspace{-4mm}
+
+					\only<1->{\begin{equation*}
+						\begin{matrix}
+						\Ad \rightarrow \Ad' = \Ad - \pd\Lambda(x) & | & \pu\Ad' = \pu\Ad - \Box\Lambda(x)
+						\end{matrix}
+					\end{equation*}}
+
+				\only<2->{Se escoge un $\Lambda(x)$ tal que $\Box \Lambda(x) = 0$}
+
+					\only<2->{\begin{equation*}
+						\begin{matrix}
+							\Lambda(x) = -iae^{-iqx} & \Rightarrow & \Box \Lambda = -q^2 \Lambda
+						\end{matrix}
+					\end{equation*}}
+
+				\only<3->{\hrule}
+
+					\only<3->{\begin{equation*}
+						\begin{matrix}
+							\Ad \rightarrow \Ad' = \Ad = \pd \Lambda(x) & = & \epsilon_\mu e^{-iqx}+ia\pd e^{-iqx}
+							\\
+							\\
+							& = & \epsilon_\mu e^{-iqx}+ia (-iq_\mu) e^{-iqx}
+							\\
+							\\
+							& = & (\epsilon_\mu+aq_\mu) e^{-iqx}
+						\end{matrix}
+					\end{equation*}}
+			\end{frame}
+
+			\begin{frame}
+				\frametitle{Polarizaci\'on del Fot\'on}
+					\vspace{-6mm}
+
+					\only<1->{\begin{equation*}
+						\epsilon_\mu \rightarrow \epsilon'_\mu = \epsilon_\mu + aq_\mu
+					\end{equation*}
+				
+					Cualquier vector polarizaci\'on que sea multiplo del cuadrimomento del fot\'on corresponde al mismo fot\'on f\'isico. De esta forma se escoge un $a$ de tal forma que la componente temporal se anule. De esta forma la expresi\'on de la condici\'on gauge de lorenz queda como:
+
+						\begin{equation*}
+							q_\mu\epsilon^\mu = 0 \Rightarrow \boxed{\boldsymbol{q\cdot\epsilon} = 0}
+						\end{equation*}}
+
+					\only<2->{	\begin{equation*}
+						\begin{matrix}
+							\boxed{
+							\begin{matrix}
+								\epsilon_1^\mu = (0,1,0,0) & \textrm{ y } &\epsilon_2^\mu = (0,0,1,0)
+							\end{matrix}
+							}
+							\\ \\
+							\boxed{
+							\begin{matrix}
+								\epsilon_-^\mu = \frac{1}{\sqrt{2}} (0,1,-i,0) & \textrm{ y } &\epsilon_+^\mu = -\frac{1}{\sqrt{2}} (0,1,i,0)
+							\end{matrix}
+							}
+						\end{matrix}
+						\end{equation*}}
+
+			\end{frame}
+
+		\section{Part. Masivas}
+
+			\begin{frame}
+				\frametitle{Polarizaci\'on de Particulas Masivas}
+				\vspace{-4mm}
+
+				\only<1->{\begin{equation*}
+					\begin{matrix}
+						\textrm{Lagrangiano} & \Rightarrow & \mathcal{L}_m = -\frac{1}{4} F^{\nu\mu}F_{\nu\mu} + \frac{1}{2} m^2 B^\mu B_\mu
+						\\
+						\\
+						\textrm{Euler-Lagrange} & \Rightarrow & (\Box + m^2)\Bu-\pu(\pdn\Bun) = 0
+					\end{matrix}
+				\end{equation*}}
+
+				\only<2->{\hrule
+
+				\begin{equation*}
+					\begin{matrix}
+						\pd \cdot \left\{(\Box + m^2)\Bu-\pu(\pdn\Bun)\right\} = 0 \\ \\
+						(\Box + m^2)\pd\Bu-\pd\pu(\pdn\Bun) = 0	\\ \\
+						(\Box + m^2)\pd\Bu-\Box(\pdn\Bun) = 0 \\ \\
+						m^2\pd\Bu = 0 \\
+					\begin{matrix}
+						\Downarrow & \Downarrow \\
+						\boxed{\pd\Bu = 0} & \boxed{(\Box + m^2)\Bu = 0}
+					\end{matrix}
+					\end{matrix}
+				\end{equation*}}
+			\end{frame}
+
+			\begin{frame}
+				\frametitle{Polarizaci\'on de Particulas Masivas}
+
+				\only<1->{Puesto que para part\'icular masivas se tiene que $q^2 = m^2$ se puede utilizar soluci\'on de onda plana.
+
+					\begin{equation*}
+					\begin{matrix}
+						\Bu = \epsilon^\mu e^{-iqx} \\ \\			
+						\begin{matrix}
+							\Box e^{-iqx} = -q^2e^{-iqx} = -m^2e^{-iqx} & \Rightarrow & (\Box + m^2)\Bu = 0
+						\end{matrix}
+					\end{matrix}
+					\end{equation*}}
+
+				\only<2->{Se aplica la condici\'on de lorenz.
+
+					\begin{equation*}
+						\pd\Bu = \pd(\epsilon^\mu e^{-iqx}) = -i\epsilon^\mu q_\mu e^{-iqx}
+					\end{equation*}}
+
+					\only<3->{\begin{equation*}
+						\boxed{
+						\begin{matrix}
+							& & & &\\
+							& &\epsilon^\mu q_\mu = 0 & & \\
+							& & \textrm{3 grados de libertad} & &\\
+							& & & &\\
+						\end{matrix}}
+					\end{equation*}}
+			\end{frame}
+
+			\begin{frame}
+				\frametitle{Polarizaci\'on de Particulas Masivas}
+
+				\only<1->{Si intentamos realizar una transformaci\'on guage:
+
+					\begin{equation*}
+						\begin{matrix}
+							\Bd \rightarrow \Bd' = \Bd - \pd\chi(x) 
+							\\ \\
+							\pu\Bd' = \pu\Bd - \Box\chi(x) 
+						\end{matrix}
+					\end{equation*}}
+
+				\only<2->{ Al contrario que en el caso del fot\'on, $\chi = e^{-iqx}$ no cumple que $\Box \chi = 0$ por lo que se determina que las part\'iculas masivas tiene 3 estados independientes de polarizaci\'on.}
+
+				\only<3->{	\begin{equation*}
+						\begin{matrix}
+							\boxed{
+							\begin{matrix}
+								\epsilon_-^\mu = \frac{1}{\sqrt{2}} (0,1,-i,0) & \textrm{ y } &\epsilon_+^\mu = -\frac{1}{\sqrt{2}} (0,1,i,0)
+							\end{matrix}
+							} \\ \\
+							\begin{matrix}
+								\epsilon^\mu_L \propto (\alpha, 0, 0, \beta) &\Rightarrow&
+							\boxed{\epsilon^\mu_L = \frac{1}{m}(p_z, 0, 0, E)}
+							\end{matrix}
+						\end{matrix}
+						\end{equation*}}
+			\end{frame}
+
+		\section{Resumen} 
+
+			\begin{frame}
+				\frametitle{Resumen}
+					%\centering
+
+					\begin{multicols}{2}
+						\only<1->{\begin{equation*}
+								\mathcal{L}_0 = -\frac{1}{4} F^{\nu\mu}F_{\nu\mu}
+							\end{equation*}}
+						\only<2->{\begin{equation*}
+								\Box \Au - \pu (\pdn \Aun) = 0
+							\end{equation*}}
+						\only<3->{\begin{equation*}
+							\begin{matrix}
+								\pd\Au = 0 &\Rightarrow& \Box \Au = 0
+							\end{matrix}
+							\end{equation*}}
+
+						\only<1->{\begin{equation*}
+								\mathcal{L}_m = -\frac{1}{4} F^{\nu\mu}F_{\nu\mu} + \frac{1}{2} m^2 B^\mu B_\mu
+							\end{equation*}}
+						\only<2->{\begin{equation*}
+								(\Box + m^2) \Bu - \pu (\pdn \Bun) = 0
+							\end{equation*}}
+						\only<3->{\begin{equation*}
+								\begin{matrix}
+									\pd\Bu = 0 &\Rightarrow& (\Box + m^2)\Bu = 0
+								\end{matrix}
+							\end{equation*}}
+					\end{multicols}
+
+					\only<4->{\hrule}
+
+					\vspace{-5mm}
+
+					\begin{multicols}{2}
+						\only<4->{\begin{equation*}
+								\Au = \epsilon(q)e^{-iqx}
+							\end{equation*}}
+						\only<5->{\begin{equation*}
+								\pd\Au = \pd(\epsilon e^{-iqx}) = 0
+							\end{equation*}}
+						
+						\only<4->{\begin{equation*}
+								\Bu = \epsilon(q) e^{-iqx}
+							\end{equation*}}
+						\only<5->{\begin{equation*}
+								\pd\Bu = \pd(\epsilon e^{-iqx}) = 0
+							\end{equation*}}
+					\end{multicols}
+
+					\only<6->{\begin{equation*}
+							\boxed{\epsilon^\mu q_\mu = 0} \Rightarrow \textrm{3 grados de libertad de } \epsilon
+						\end{equation*}}
+			\end{frame}
+
+			\begin{frame}
+				\frametitle{Resumen}
+
+					\vspace{-4mm}
+
+					\only<1->{\begin{equation*}
+							\boxed{\epsilon^\mu q_\mu = 0} \Rightarrow \textrm{3 grados de libertad de } \epsilon
+						\end{equation*}}
+
+
+					\only<2->{\hrule}
+
+					%\vspace{-5mm}
+
+						\only<2->{\begin{equation*}
+								\begin{matrix}
+									\pu \Ad' = \pu \Ad - \Box \Lambda(x) & & \pu \Bd' = \pu \Bd - \Box \chi(x)
+									\\ \\
+									\Box \Lambda = -q^2\Lambda = 0 & & \Box \chi = -q^2\chi = -m^2\chi \neq 0
+									\\ \\
+									\Lambda(x) = -iae^{-iqx}
+								\end{matrix}
+							\end{equation*}}
+
+					\only<3->{\hrule}
+
+					\only<3->{\begin{equation*}
+						\Ad \rightarrow \Ad' = \Ad - \pd \Lambda(x) = \epsilon_\mu e^{-iqx}+ia\pd e^{-iqx}
+					\end{equation*}}
+
+					\only<4->{\begin{equation*}
+							\begin{matrix}
+								\epsilon_\mu \rightarrow \epsilon_\mu' = \epsilon_\mu + aq_\mu & \Rightarrow &
+								\boxed{\begin{matrix}
+								 	\boxed{\boldsymbol{\epsilon \cdot q} = 0}
+								 	\\
+								 	\\
+								 	\textrm{2 grados de libertad}
+								\end{matrix}}
+							\end{matrix}
+						\end{equation*}}
+			\end{frame}
+
+			\nocite{Thomson:2013zua}
+
+%----------------------------------------------------------------------------
+%     BIBLIOGRAPHY
+%----------------------------------------------------------------------------
+
+
+	\bibliographystyle{unsrt}
+	\bibliography{biblio}
+
+\end{document} 

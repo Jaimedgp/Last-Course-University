@@ -66,7 +66,7 @@ def calcMadelung(red):
     return madelung
 
 madelung = 0
-zonas = [i for i in range(1, 40)]
+zonas = [i for i in range(1, 1001)]
 #madelungArray = []
 
 for zona in zonas:
