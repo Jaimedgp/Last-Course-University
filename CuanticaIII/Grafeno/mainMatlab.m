@@ -5,8 +5,10 @@ kx = linspace(-2*pi, 2*pi, 100);
 ky = linspace(-2*pi, 2*pi, 100);
 [kx, ky] = meshgrid(kx, ky);
 
-energiaMas = - g*sqrt(3+2*cos(kx) + 2*cos(kx/2.0 + sqrt(3)*ky/2.0) + 2*cos(kx/2.0-sqrt(3)*ky/2.0));
-energiaMenos = g*sqrt(3+2*cos(kx) + 2*cos(kx/2.0 + sqrt(3)*ky/2.0) + 2*cos(kx/2.0-sqrt(3)*ky/2.0));
+energiaMas = - g*sqrt(3+2*cos(kx) + 2*cos(kx/2.0 + sqrt(3)*ky/2.0) +...
+                                            2*cos(kx/2.0-sqrt(3)*ky/2.0));
+energiaMenos = g*sqrt(3+2*cos(kx) + 2*cos(kx/2.0 + sqrt(3)*ky/2.0) +...
+                                            2*cos(kx/2.0-sqrt(3)*ky/2.0));
 
 a1 = subplot(121);
 	colormap(a1, jet);
